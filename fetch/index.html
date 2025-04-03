@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício - Consumindo API</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <button onclick="fetchProducts()">Buscar Produtos</button>
+        <hr />
+        <ul id="product-list">
+            <div class="loader" style="display: none;"></div>
+        </ul>
+    </main>
+
+    <script defer>
+        const API_URL = 'https://fakestoreapi.com/products';
+
+        const fetchProducts = () => {
+            const loader = document.querySelector('.loader');
+
+            loader.style.display = 'block';
+            try {
+                fetch(API_URL)
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+            } catch (error) {
+                console.error(error);
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
