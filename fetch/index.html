@@ -12,27 +12,57 @@
     <main>
         <button onclick="fetchProducts()">Buscar Produtos</button>
         <hr />
+        <div class="loader" style="display: none;"></div>
         <ul id="product-list">
-            <div class="loader" style="display: none;"></div>
         </ul>
     </main>
 
     <script defer>
         const API_URL = 'https://fakestoreapi.com/products';
 
-        const fetchProducts = () => {
+        const fetchProducts = async () => {
             const loader = document.querySelector('.loader');
+            const productList = document.querySelector('#product-list');
 
             loader.style.display = 'block';
+            productList.innerHTML = '';
             try {
-                fetch(API_URL)
-                    .then(response => response.json())
-                    .then(data => console.log(data));
+                const response = await fetch(API_URL);
+                console.log(response)
+                const data = await response.json();
+                console.log(data);
+
+                data.forEach(product => productList.innerHTML += ProductItem(product));
             } catch (error) {
                 console.error(error);
             } finally {
                 loader.style.display = 'none';
             }
+        }
+
+        const ProductItem = (product) => {
+            return `
+                <li>
+                    <div>
+                        <span class="id">#${product.id}</span> <strong class="title">${product.title}</strong>    
+                    </div>
+                    <div class="content">                        
+                        <img src="${product.image}" alt="Imagem do produto ${product.title}" /> 
+                        <div>
+                            <p><strong>Categoria: </strong>${product.category}</p>
+                            <p class="description">${product.description}</p>
+                            <div>
+                                <span class="price">
+                                    <strong>R$</strong>${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}   
+                                </span>
+                                <span class="rating">
+                                    <strong>${product.rating.rate} | ${product.rating.count}</strong> avaliações
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            `;
         }
     </script>
 </body>

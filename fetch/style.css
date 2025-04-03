@@ -1,15 +1,21 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 main {
     margin: 2rem auto 0;
-    max-width: 60vw;
+    max-width: 880px;
+    padding-bottom: 4rem;
 }
 
 button {
     cursor: pointer;
     padding: 0.4rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
 
     color: black;
     background: transparent;
@@ -30,6 +36,87 @@ button {
 
     &:active {
         transform: translateY(5px);
+    }
+}
+
+#product-list {
+    width: 100%;
+
+    li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.25rem;
+        width: 100%;
+
+        list-style-type: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 2rem 1rem 0.25rem;
+
+        .id {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .title {
+            font-size: 1.2em;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+            gap: 0.15rem;
+            margin-top: 1rem;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                max-width: 75%;
+
+                .description {
+                    color: rgba(0, 0, 0, 0.75);
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1rem;
+
+                    .price {
+                        display: inline-flex;
+                        flex-direction: row;
+                        align-items: flex-end;
+                        gap: 0.15rem;
+
+                        strong {
+                            font-size: 1.1em;
+                            font-weight: bold;
+                        }
+                    }
+
+                    .rating {
+                        display: inline-flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 0.15rem;
+
+                        strong {
+                            font-size: 1.1em;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+
+            img {
+                aspect-ratio: 1;
+                height: 8rem;
+            }
+        }
     }
 }
 
